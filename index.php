@@ -16,6 +16,18 @@ switch ($route) {
     case ($route[0] == 'article' && isset($route[1])):
         require_once 'template/article.php';
         break;
+
+    case ($route[0] == 'cat' && isset($route[1])):
+        require_once 'template/category.php';
+        break;
+
+    case ($route[0] == 'registration'):
+        require_once 'template/registration.php';
+        break;
+
+    case ($route[0] == 'login'):
+        require_once 'template/login.php';
+        break;
     
     default:
         require_once 'template/404.php';
