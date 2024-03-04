@@ -1,7 +1,6 @@
 <?php
 if(isset($_POST['submit'])){
     $user = login($_POST['login'], $_POST['password']);
-    // var_dump($user);
 }
 
 if($user){
@@ -12,6 +11,13 @@ if($user){
         $ip = $_SERVER['REMOTE_ADDR'];
     }
     updateUser($user['id'], $hash, $ip);
+
+    setcookie('id', $user['id'], time()+60*60*24, '/');
+    setcookie('hash', $hash, time()+60*60*24, '/');
+    header("Location: /template/admin.php");
+    exit();
+} else {
+    echo "Wrong login or password";
 }
 
 ?> 
