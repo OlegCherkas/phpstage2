@@ -28,8 +28,13 @@ switch ($route) {
     case ($route[0] == 'login'):
         require_once 'template/login.php';
         break;
+
+    case ($route[0] == 'admin'):
+        require_once 'template/admin.php';
+        break;
     
     default:
         require_once 'template/404.php';
         break;
 }
+?>

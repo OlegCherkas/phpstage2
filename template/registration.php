@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
     } else {
         createUser($_POST['login'], $_POST['password']);
         
-        header("Location: /template/login.php");
+        header("Location: template/login");
         exit();
     }
 

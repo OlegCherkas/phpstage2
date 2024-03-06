@@ -77,3 +77,46 @@ function updateUser($userId, $hash, $ip){
 
     return execQuery($query);
 }
+
+function getUser(){
+    if(isset($_COOKIE['id']) && isset($_COOKIE['hash'])){
+        $query = "SELECT `id`, `login`, `hash`, INET_NTOA(ip) as ip FROM `users` WHERE id = ".intval($_COOKIE['id'])." LIMIT 1";
+        $user = select($query);
+
+        if(count($user) === 0){
+            return false;
+        } else {
+            $user = $user[0];
+
+            if(!is_null($user['ip'])){
+                if($user['ip'] !== $_SERVER['REMOTE_ADDR']){
+                    clearCookies();
+                    return false;
+                }
+            }
+
+            if($user['hash'] == $_COOKIE['hash'] && $user['id'] == $_COOKIE['id']){
+                $_GET['login'] = $user['login'];
+                return true;
+            } else {
+                clearCookies();
+                return false;
+            }
+        }
+
+    } else {
+        clearCookies();
+        return false;
+    }
+}
+
+function clearCookies(){
+    setcookie('id', '', time()-60*60*24, '/', null, null, true);
+    setcookie('hash', '', time()-60*60*24, '/', null, null, true);
+    unset($_GET['login']);
+}
+
+function test($a){
+    echo $a;
+}
+?>

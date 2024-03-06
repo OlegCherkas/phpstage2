@@ -1,5 +1,6 @@
 <?php
-if(isset($_POST['submit'])){
+
+if(isset($_POST['submit'])){    
     $user = login($_POST['login'], $_POST['password']);
 }
 
@@ -14,8 +15,8 @@ if($user){
 
     setcookie('id', $user['id'], time()+60*60*24, '/');
     setcookie('hash', $hash, time()+60*60*24, '/');
-    header("Location: /template/admin.php");
-    exit();
+    header("Location: /admin");
+    exit();    
 } else {
     echo "Wrong login or password";
 }
