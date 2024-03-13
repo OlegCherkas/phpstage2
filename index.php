@@ -29,6 +29,17 @@ switch ($route) {
         require_once 'template/login.php';
         break;
 
+    case ($route[0] == 'admin' AND $route[1] === 'delete' AND isset($route[2])):
+        if (!getUser()) {
+            header('Location: /');
+            exit();
+        }
+
+        $query = "DELETE FROM `info` WHERE id=" . $route[2];
+        execQuery($query);
+        header('Location: /admin');
+        break;
+
     case ($route[0] == 'admin'):
         require_once 'template/admin.php';
         break;

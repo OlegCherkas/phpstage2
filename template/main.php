@@ -13,7 +13,6 @@ foreach($result as $item){
     $out .="<p>Descr_min: {$item['descr_min']}</p>";
     $out .="<p>Description: {$item['description']}</p>";
     $out .="<img src='static/images/{$item["image"]}' alt='{$item["image"]}' width='200px'>";
-
     $out .="<a href='article/{$item["url"]}'> Read more...</a>";
     $out .="</div>";
 }
